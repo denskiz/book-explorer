@@ -32,7 +32,7 @@ const App = () => {
         <form
           onSubmit={(event) => {
             search();
-            event.preventDefault();
+            // event.preventDefault();
             setQuery("");
           }}
         >

@@ -17,7 +17,20 @@ it("Shows a input", () => {
   expect(wrapped.find("input").length).toEqual(1);
 });
 
-it("Has a input that users can type it", () => {
-  wrapped.find("input").simulate("change", { target: { value: "new query" } });
-  wrapped.update();
+describe("the input", () => {
+  beforeEach(() => {
+    wrapped
+      .find("input")
+      .simulate("change", { target: { value: "new query" } });
+    wrapped.update();
+  });
+  it("Has a input that users can type it", () => {
+    expect(wrapped.find("input").prop("value")).toEqual("new query");
+  });
+
+  it("When form is submitted, input gets emptied", () => {
+    wrapped.find("form").simulate("submit");
+    wrapped.update();
+    expect(wrapped.find("input").prop("value")).toEqual("");
+  });
 });
